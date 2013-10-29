@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var subject = require('./routes/subject');
 var http = require('http');
 var path = require('path');
 
@@ -22,14 +22,23 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
+// 试题
+app.get('/subject', subject.new);
+app.post('/subject', subject.new);
+app.get('/subject/:id', subject.list);
+app.post('/subject/:id', subject.modify);
+app.delete('/subject/:id', subject.remove);
+app.get('/subjects', subject.listAll);
+
+//
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });

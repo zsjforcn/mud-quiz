@@ -1,5 +1,11 @@
-extends layout
+extends layout/default
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+    include mods/head
+
+    div(class="main")
+        div(class="container")
+            p(class="text-center") welcome home page
+
+    include mods/foot
