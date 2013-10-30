@@ -3,14 +3,15 @@ extends layout/default
 block content
 
     include mods/head
+
     // main {{
 
     div(class="main")
         div(class="container")
             div(class="row")
-                div(class="alert alert-info")
-                    button(type="button", class="close", data-dismiss="alert") &times;
-                    h4 创建新试题
+                div(class="page-header")
+                    h1 创建试题
+                        small （避免创建重复类似试题，建议先搜索）
                 form(class="form-horizontal", action="/subject", method="post")
                     div(class="control-group")
                         label(class="control-label", for="J_Q_title") 问题：
@@ -21,7 +22,7 @@ block content
                         div(class="controls")
                             textarea(id="J_Q_code", rows=8, class="span8", placeholder="代码（可选）", name="q-code")
                     div(class="control-group")
-                        label(class="control-label") Tag:
+                        label(class="control-label") 标签：
                         div(class="controls")
                             label(class="checkbox inline")
                                 input(type="checkbox", value="javascript", name="q-tag[]")
@@ -32,6 +33,12 @@ block content
                             label(class="checkbox inline")
                                 input(type="checkbox", value="css", name="q-tag[]")
                                 | css
+                            label(class="checkbox inline")
+                                input(type="checkbox", value="java", name="q-tag[]")
+                                | java
+                            label(class="checkbox inline")
+                                | 其他：
+                                input(type="text", name="q-tag[]")
                     div(class="control-group")
                         label(class="control-label", for="J_A_title") 答案：
                         div(class="controls")
@@ -41,7 +48,8 @@ block content
                         div(class="controls")
                             textarea(id="J_A_code", rows=8, class="span8", placeholder="代码（可选）", name="a-code")
                     div(class="form-actions")
-                        button(type="submit", class="btn btn-primary") 创建试题
+                        button(type="submit", class="btn btn-primary") 创建
+
     // main }}
 
     include mods/foot
