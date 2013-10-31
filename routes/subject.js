@@ -10,7 +10,7 @@ var CONST = {
 
 exports.new = function (req, res) {
     if (req.route.method === 'get') {
-        res.render('subject-new');
+        res.render('new');
         return;
     }
     if (req.route.method === 'post') {
@@ -77,10 +77,10 @@ exports.list = function (req, res) {
                         tags.other = obj[len];
                     }
                 }
-                res.render('subject-modify', {data: docs, tags: tags});
+                res.render('modify', {data: docs, tags: tags});
             }
             else {
-                res.render('subject-list', {data: [docs]});
+                res.render('list', {data: [docs]});
             }
         });
     });
@@ -101,7 +101,7 @@ exports.listAll = function(req, res){
                 res.redirect('/subject');
                 return;
             }
-            res.render('subject-list', {data: docs});
+            res.render('list', {data: docs});
         });
     });
 };
@@ -152,4 +152,9 @@ exports.remove = function (req, res) {
         });
     });
 
+};
+
+exports.search = function (req, res) {
+    var q = req.query.q;
+    res.send(q);
 };

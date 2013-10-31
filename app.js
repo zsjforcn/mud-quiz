@@ -31,14 +31,17 @@ if ('development' == app.get('env')) {
 // 路由规则
 app.get('/', routes.index);
 
+// 增
 app.get('/subject', subject.new);
 app.post('/subject/new', subject.new);
-
+// 查、改、删
 app.get('/subject/:id', subject.list);
 app.post('/subject/:id/modify', subject.modify);
 app.post('/subject/:id/remove', subject.remove);
-
+// 查所有
 app.get('/subjects', subject.listAll);
+// 搜索
+app.get('/search', subject.search);
 
 //
 http.createServer(app).listen(app.get('port'), function(){
