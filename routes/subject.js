@@ -24,6 +24,7 @@ exports.new = function (req, res) {
             }
         }
         data['create-time'] = data['modify-time'] = t;
+        data['remove'] = false;
         dbClient.connect(CONST.DB_CONNECT, function (err, db) {
             if (err) {
                 throw err;

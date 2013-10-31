@@ -9,7 +9,10 @@ block content
             div(class='hero-unit')
                 h1 MUD-QUIZ
                 p 美团移动前端试题库
-                p
-                    a(class='btn btn-primary btn-large', href='/subject') 创建试题
+                div(class='btn-toolbar')
+                    div(class='btn-group')
+                        a(class='btn btn-primary btn-large', href='/subject') 新建试题
+                    div(class='btn-group')
+                        a(class='btn btn-large', href='/subjects') 试题库
 
     include mods/foot

@@ -17,9 +17,15 @@ block content
                         div(class='controls')
                             textarea(id='J_Q_title', rows=3, class='span8', placeholder='题干（必须）', name='q-question', required)= data['q-question']
                     div(class='control-group')
-                        label(class='control-label', for='J_Q_code')
+                        label(class='control-label', for='J_Q_code') 代码：
                         div(class='controls')
-                            textarea(id='J_Q_code', rows=8, class='span8', placeholder='代码（可选）', name='q-code')= data['q-code']
+                            button(class='btn btn-link collapse-trigger', type='button', data-target='#J_Q_code_con') 添加代码
+                            if data['q-code']
+                                div(class='collapse in', id='J_Q_code_con')
+                                    textarea(id='J_Q_code', rows=8, class='span8', placeholder='代码（可选）', name='q-code')= data['q-code']
+                            else
+                                div(class='collapse', id='J_Q_code_con')
+                                    textarea(id='J_Q_code', rows=8, class='span8', placeholder='代码（可选）', name='q-code')= data['q-code']
                     div(class='control-group')
                         label(class='control-label') 标签：
                         div(class='controls')
@@ -55,12 +61,23 @@ block content
                         div(class='controls')
                             textarea(id='J_A_title', rows=3, class='span8', placeholder='答案（必须）', name='a-answer', required)= data['a-answer']
                     div(class='control-group')
-                        label(class='control-label', for='J_A_code')
+                        label(class='control-label', for='J_A_code') 代码：
                         div(class='controls')
-                            textarea(id='J_A_code', rows=8, class='span8', placeholder='代码（可选）', name='a-code')= data['a-code']
+                            button(class='btn btn-link collapse-trigger', type='button', data-target='#J_A_code_con') 添加代码
+                            if data['a-code']
+                                div(class='collapse in', id='J_A_code_con')
+                                    textarea(id='J_A_code', rows=8, class='span8', placeholder='代码（可选）', name='a-code')= data['a-code']
+                            else
+                                div(class='collapse', id='J_A_code_con')
+                                    textarea(id='J_A_code', rows=8, class='span8', placeholder='代码（可选）', name='a-code')= data['a-code']
                     div(class='form-actions')
                         button(type='submit', class='btn btn-primary') 保存
 
     // main }}
 
     include mods/foot
+    script
+        $('.collapse-trigger').on('click', function(e) {
+            var id = $(this).attr('data-target');
+            $(id).collapse('toggle');
+        });

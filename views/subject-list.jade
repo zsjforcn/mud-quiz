@@ -3,6 +3,7 @@ extends layout/default
 block content
 
     include mods/head
+
     link(rel='stylesheet', href='/syntaxhighlighter/styles/shCore.css')
     link(rel='stylesheet', href='/syntaxhighlighter/styles/shThemeDefault.css')
     // main {{
@@ -54,5 +55,5 @@ block content
     script(src='/syntaxhighlighter/scripts/shCore.js')
     script(src='/syntaxhighlighter/scripts/shAutoloader.js')
     script
-        SyntaxHighlighter.autoloader('js jscript javascript  /syntaxhighlighter/scripts/shBrushJScript.js', 'html xml /syntaxhighlighter/scripts/shBrushXml.js');
+        SyntaxHighlighter.autoloader('js jscript javascript  /syntaxhighlighter/scripts/shBrushJScript.js');
         SyntaxHighlighter.all();

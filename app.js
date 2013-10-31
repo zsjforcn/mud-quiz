@@ -28,14 +28,16 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+// 路由规则
 app.get('/', routes.index);
 
-// 试题
 app.get('/subject', subject.new);
 app.post('/subject/new', subject.new);
+
 app.get('/subject/:id', subject.list);
 app.post('/subject/:id/modify', subject.modify);
 app.post('/subject/:id/remove', subject.remove);
+
 app.get('/subjects', subject.listAll);
 
 //
