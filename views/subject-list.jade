@@ -3,53 +3,56 @@ extends layout/default
 block content
 
     include mods/head
-    link(rel="stylesheet", href="/syntaxhighlighter/styles/shCore.css")
-    link(rel="stylesheet", href="/syntaxhighlighter/styles/shThemeDefault.css")
+    link(rel='stylesheet', href='/syntaxhighlighter/styles/shCore.css')
+    link(rel='stylesheet', href='/syntaxhighlighter/styles/shThemeDefault.css')
     // main {{
 
-    div(class="main")
-        div(class="container")
-            div(class="row")
-                div(class="page-header")
+    div(class='main')
+        div(class='container')
+            div(class='row')
+                div(class='page-header')
                     h1 试题库
             each item in data
-                div(class="row")
-                    div(class="subject")
-                        div(class="span11")
-                            div(class="mod")
-                                div(class="hd")
+                div(class='row')
+                    div(class='subject')
+                        div(class='span11')
+                            div(class='mod')
+                                div(class='hd')
                                     pre= item['q-question']
-                                div(class="bd")
+                                div(class='bd')
                                     if item['q-code']
                                         div
-                                            span(class="label label-info") 提问代码
-                                        pre(class="brush: js")= item['q-code']
-                                div(class="ft")
+                                            span(class='label label-info') 提问代码
+                                        pre(class='brush: js')= item['q-code']
+                                div(class='ft')
                                     if item['q-tag']
-                                        span(class="label label-info") 标签
+                                        span(class='label label-info') 标签
                                         | ：
                                         span= item['q-tag']
-                            div(class="mod")
-                                div(class="hd")
+                            div(class='mod')
+                                div(class='hd')
                                     pre= item['a-answer']
-                                div(class="bd")
+                                div(class='bd')
                                     if item['a-code']
                                         div
-                                            span(class="label label-info") 答案代码
-                                        pre(class="brush: js")= item['a-code']
-                                div(class="ft")
-                        div(class="span1")
-                            div(class="")
-                                button(class="btn") 选中
-                            div(class="")
-                                a(class="btn btn-link", href="/subject/" + item['_id']) 详情
-                            div(class="")
-                                a(class="btn btn-link", href="/subject/" + item['_id'] + "?modify") 编辑
+                                            span(class='label label-info') 答案代码
+                                        pre(class='brush: js')= item['a-code']
+                                div(class='ft')
+                        div(class='span1')
+                            div(class='')
+                                button(class='btn') 选中
+                            div(class='')
+                                a(class='btn btn-link', href='/subject/' + item['_id']) 详情
+                            div(class='')
+                                a(class='btn btn-link', href='/subject/' + item['_id'] + '?modify') 编辑
+                            div(class='')
+                                form(class='form-inline', action='/subject/' + item['_id'] + '/remove', method='post')
+                                    button(class='btn btn-link') 删除
     // main }}
 
     include mods/foot
-    script(src="/syntaxhighlighter/scripts/shCore.js")
-    script(src="/syntaxhighlighter/scripts/shAutoloader.js")
+    script(src='/syntaxhighlighter/scripts/shCore.js')
+    script(src='/syntaxhighlighter/scripts/shAutoloader.js')
     script
         SyntaxHighlighter.autoloader('js jscript javascript  /syntaxhighlighter/scripts/shBrushJScript.js', 'html xml /syntaxhighlighter/scripts/shBrushXml.js');
         SyntaxHighlighter.all();

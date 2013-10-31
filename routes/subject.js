@@ -91,7 +91,7 @@ exports.listAll = function(req, res){
             throw err;
         }
         var collection = db.collection(CONST.DB_COLLECTION);
-        collection.find().sort({'modify-time': -1}).toArray(function(err, docs) {
+        collection.find({remove: false}, {sort: {'modify-time': -1}}).toArray(function(err, docs) {
             if (err) {
                 throw err;
             }
@@ -117,6 +117,7 @@ exports.modify = function (req, res) {
         }
     }
     data['modify-time'] = t;
+    data['remove'] = false;
     dbClient.connect(CONST.DB_CONNECT, function (err, db) {
         if (err) {
             throw err;
@@ -130,11 +131,24 @@ exports.modify = function (req, res) {
             res.redirect('/subject/' + id);
         });
     });
-
 };
-
 
 exports.remove = function (req, res) {
     var id = req.params.id;
-    res.render('subject-list', {text: 'remove subject ' + id});
+    dbClient.connect(CONST.DB_CONNECT, function (err, db) {
+        if (err) {
+            throw err;
+        }
+        var collection = db.collection(CONST.DB_COLLECTION);
+        // not really remove from db
+        // collection.remove({_id: ObjectID(id)}, function (err, count) {
+        collection.update({_id: ObjectID(id)}, {$set: {remove: true}}, {safe: true}, function (err, count) {
+            if (err) {
+                throw err;
+            }
+            db.close();
+            res.redirect('/subjects');
+        });
+    });
+
 };

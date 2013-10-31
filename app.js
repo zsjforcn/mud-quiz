@@ -32,10 +32,10 @@ app.get('/', routes.index);
 
 // 试题
 app.get('/subject', subject.new);
-app.post('/subject', subject.new);
+app.post('/subject/new', subject.new);
 app.get('/subject/:id', subject.list);
-app.post('/subject/:id', subject.modify);
-app.delete('/subject/:id', subject.remove);
+app.post('/subject/:id/modify', subject.modify);
+app.post('/subject/:id/remove', subject.remove);
 app.get('/subjects', subject.listAll);
 
 //

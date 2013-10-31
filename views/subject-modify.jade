@@ -6,60 +6,60 @@ block content
 
     // main {{
 
-    div(class="main")
-        div(class="container")
-            div(class="row")
-                div(class="page-header")
+    div(class='main')
+        div(class='container')
+            div(class='row')
+                div(class='page-header')
                     h1 编辑试题
-                form(class="form-horizontal", action="/subject/" + data['_id'], method="post")
-                    div(class="control-group")
-                        label(class="control-label", for="J_Q_title") 问题：
-                        div(class="controls")
-                            textarea(id="J_Q_title", rows=3, class="span8", placeholder="题干（必须）", name="q-question", required)= data['q-question']
-                    div(class="control-group")
-                        label(class="control-label", for="J_Q_code")
-                        div(class="controls")
-                            textarea(id="J_Q_code", rows=8, class="span8", placeholder="代码（可选）", name="q-code")= data['q-code']
-                    div(class="control-group")
-                        label(class="control-label") 标签：
-                        div(class="controls")
-                            label(class="checkbox inline")
+                form(class='form-horizontal', action='/subject/' + data['_id'] + '/modify', method='post')
+                    div(class='control-group')
+                        label(class='control-label', for='J_Q_title') 问题：
+                        div(class='controls')
+                            textarea(id='J_Q_title', rows=3, class='span8', placeholder='题干（必须）', name='q-question', required)= data['q-question']
+                    div(class='control-group')
+                        label(class='control-label', for='J_Q_code')
+                        div(class='controls')
+                            textarea(id='J_Q_code', rows=8, class='span8', placeholder='代码（可选）', name='q-code')= data['q-code']
+                    div(class='control-group')
+                        label(class='control-label') 标签：
+                        div(class='controls')
+                            label(class='checkbox inline')
                                 if tags.isJs
-                                    input(type="checkbox", value="javascript", name="q-tag[]", checked)
+                                    input(type='checkbox', value='javascript', name='q-tag[]', checked)
                                 else
-                                    input(type="checkbox", value="javascript", name="q-tag[]")
+                                    input(type='checkbox', value='javascript', name='q-tag[]')
                                 | javascript
-                            label(class="checkbox inline")
+                            label(class='checkbox inline')
                                 if tags.isHtml
-                                    input(type="checkbox", value="html", name="q-tag[]", checked)
+                                    input(type='checkbox', value='html', name='q-tag[]', checked)
                                 else
-                                    input(type="checkbox", value="html", name="q-tag[]")
+                                    input(type='checkbox', value='html', name='q-tag[]')
                                 | html
-                            label(class="checkbox inline")
+                            label(class='checkbox inline')
                                 if tags.isCss
-                                    input(type="checkbox", value="css", name="q-tag[]", checked)
+                                    input(type='checkbox', value='css', name='q-tag[]', checked)
                                 else
-                                    input(type="checkbox", value="css", name="q-tag[]")
+                                    input(type='checkbox', value='css', name='q-tag[]')
                                 | css
-                            label(class="checkbox inline")
+                            label(class='checkbox inline')
                                 if tags.isJava
-                                    input(type="checkbox", value="java", name="q-tag[]", checked)
+                                    input(type='checkbox', value='java', name='q-tag[]', checked)
                                 else
-                                    input(type="checkbox", value="java", name="q-tag[]")
+                                    input(type='checkbox', value='java', name='q-tag[]')
                                 | java
-                            label(class="checkbox inline")
+                            label(class='checkbox inline')
                                 | 其他：
-                                input(type="text", name="q-tag[]", value=tags.other)
-                    div(class="control-group")
-                        label(class="control-label", for="J_A_title") 答案：
-                        div(class="controls")
-                            textarea(id="J_A_title", rows=3, class="span8", placeholder="答案（必须）", name="a-answer", required)= data['a-answer']
-                    div(class="control-group")
-                        label(class="control-label", for="J_A_code")
-                        div(class="controls")
-                            textarea(id="J_A_code", rows=8, class="span8", placeholder="代码（可选）", name="a-code")= data['a-code']
-                    div(class="form-actions")
-                        button(type="submit", class="btn btn-primary") 保存
+                                input(type='text', name='q-tag[]', value=tags.other)
+                    div(class='control-group')
+                        label(class='control-label', for='J_A_title') 答案：
+                        div(class='controls')
+                            textarea(id='J_A_title', rows=3, class='span8', placeholder='答案（必须）', name='a-answer', required)= data['a-answer']
+                    div(class='control-group')
+                        label(class='control-label', for='J_A_code')
+                        div(class='controls')
+                            textarea(id='J_A_code', rows=8, class='span8', placeholder='代码（可选）', name='a-code')= data['a-code']
+                    div(class='form-actions')
+                        button(type='submit', class='btn btn-primary') 保存
 
     // main }}
 
