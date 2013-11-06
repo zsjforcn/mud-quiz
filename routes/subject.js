@@ -5,7 +5,7 @@ var dbClient = require('mongodb').MongoClient,
 var CONST = {
     DB_CONNECT: 'mongodb://sanji.com:27017/mud-quiz',
     DB_COLLECTION: 'subjects',
-    DB_COLUMNS: ['q-question', 'q-code', 'q-tag', 'a-answer', 'a-code', 'create-time', 'modify-time']
+    DB_COLUMNS: ['q-question', 'q-code', 'q-tag', 'q-level', 'a-answer', 'a-code', 'create-time', 'modify-time']
 };
 
 exports.new = function (req, res) {
@@ -26,14 +26,8 @@ exports.new = function (req, res) {
         data['create-time'] = data['modify-time'] = t;
         data['remove'] = false;
         dbClient.connect(CONST.DB_CONNECT, function (err, db) {
-            if (err) {
-                throw err;
-            }
             var collection = db.collection(CONST.DB_COLLECTION);
             collection.insert(data, function (err, docs) {
-                if (err) {
-                    throw err;
-                }
                 db.close();
                 res.redirect('/subject/' + docs[0]._id);
             });
@@ -44,15 +38,16 @@ exports.new = function (req, res) {
 exports.list = function (req, res) {
     var id = req.params.id,
         isModify = !!(typeof req.query.modify !== 'undefined');
+
     dbClient.connect(CONST.DB_CONNECT, function (err, db) {
-        if (err) {
-            throw err;
-        }
         var collection = db.collection(CONST.DB_COLLECTION);
-        collection.findOne({_id: ObjectID(id)}, function (err, docs) {
-            if (err) {
-                throw err;
-            }
+        try {
+            id = ObjectID(id);
+        }
+        catch (e) {
+            console.error(e);
+        }
+        collection.findOne({_id: id}, function (err, docs) {
             db.close();
             if (docs === null) {
                 res.redirect('/subject');
@@ -88,14 +83,8 @@ exports.list = function (req, res) {
 
 exports.listAll = function(req, res){
     dbClient.connect(CONST.DB_CONNECT, function (err, db) {
-        if (err) {
-            throw err;
-        }
         var collection = db.collection(CONST.DB_COLLECTION);
         collection.find({remove: false}, {sort: {'modify-time': -1}}).toArray(function(err, docs) {
-            if (err) {
-                throw err;
-            }
             db.close();
             if (docs.length === 0) {
                 res.redirect('/subject');
@@ -107,8 +96,8 @@ exports.listAll = function(req, res){
 };
 
 exports.modify = function (req, res) {
-    var id = req.params.id;
-    var t = +Date.now(),
+    var id = req.params.id,
+        t = +Date.now(),
         data = {};
 
     for(var len = CONST.DB_COLUMNS.length - 1; len >= 0; len--) {
@@ -120,14 +109,14 @@ exports.modify = function (req, res) {
     data['modify-time'] = t;
     data['remove'] = false;
     dbClient.connect(CONST.DB_CONNECT, function (err, db) {
-        if (err) {
-            throw err;
-        }
         var collection = db.collection(CONST.DB_COLLECTION);
-        collection.update({_id: ObjectID(id)}, {$set: data}, {safe: true}, function (err, count) {
-            if (err) {
-                throw err;
-            }
+        try {
+            id = ObjectID(id);
+        }
+        catch (e) {
+            console.error(e);
+        }
+        collection.update({_id: id}, {$set: data}, {safe: true}, function (err, count) {
             db.close();
             res.redirect('/subject/' + id);
         });
@@ -135,18 +124,20 @@ exports.modify = function (req, res) {
 };
 
 exports.remove = function (req, res) {
-    var id = req.params.id;
+    var id = req.params.id,
+        t = +Date.now();
+
     dbClient.connect(CONST.DB_CONNECT, function (err, db) {
-        if (err) {
-            throw err;
-        }
         var collection = db.collection(CONST.DB_COLLECTION);
         // not really remove from db
-        // collection.remove({_id: ObjectID(id)}, function (err, count) {
-        collection.update({_id: ObjectID(id)}, {$set: {remove: true}}, {safe: true}, function (err, count) {
-            if (err) {
-                throw err;
-            }
+        try {
+            id = ObjectID(id);
+        }
+        catch (e) {
+            console.error(e);
+        }
+        // collection.remove({_id: id}, function (err, count) {
+        collection.update({_id: id}, {$set: {remove: true, 'modify-time': t}}, {safe: true}, function (err, count) {
             db.close();
             res.redirect('/subjects');
         });

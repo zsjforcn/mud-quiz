@@ -26,10 +26,16 @@ block content
                                             span(class='label label-info') 提问代码
                                         pre(class='brush: js')= item['q-code']
                                 div(class='ft')
+                                    if item['q-level']
+                                        div
+                                            span(class='label label-info') 级别
+                                            | ：
+                                            span= 'p' + item['q-level']
                                     if item['q-tag']
-                                        span(class='label label-info') 标签
-                                        | ：
-                                        span= item['q-tag']
+                                        div
+                                            span(class='label label-info') 标签
+                                            | ：
+                                            span= item['q-tag'].join(', ')
                             div(class='mod')
                                 div(class='hd')
                                     pre= item['a-answer']

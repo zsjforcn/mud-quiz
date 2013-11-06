@@ -27,6 +27,33 @@ block content
                                 div(class='collapse', id='J_Q_code_con')
                                     textarea(id='J_Q_code', rows=8, class='span8', placeholder='代码（可选）', name='q-code')= data['q-code']
                     div(class='control-group')
+                        label(class='control-label') 级别：
+                        div(class='controls')
+                            label(class='radio inline')
+                                if data['q-level']==4
+                                    input(type='radio', value='4', name='q-level', checked)
+                                else
+                                    input(type='radio', value='4', name='q-level')
+                                | p4
+                            label(class='radio inline')
+                                if data['q-level']==5
+                                    input(type='radio', value='5', name='q-level', checked)
+                                else
+                                    input(type='radio', value='5', name='q-level')
+                                | p5
+                            label(class='radio inline')
+                                if data['q-level']==6
+                                    input(type='radio', value='6', name='q-level', checked)
+                                else
+                                    input(type='radio', value='6', name='q-level')
+                                | p6
+                            label(class='radio inline')
+                                if data['q-level']==7
+                                    input(type='radio', value='7', name='q-level', checked)
+                                else
+                                    input(type='radio', value='7', name='q-level')
+                                | p7
+                    div(class='control-group')
                         label(class='control-label') 标签：
                         div(class='controls')
                             label(class='checkbox inline')
